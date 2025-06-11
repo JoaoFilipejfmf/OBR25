@@ -13,8 +13,8 @@ class Robo:
     integral = 0
     erro_anterior = 0
     hub = PrimeHub()
-    sensor_esquerdo = ColorSensor(Port.A)
-    sensor_direito = ColorSensor(Port.B)
+    sensor_esquerdo = ColorSensor(Port.B)
+    sensor_direito = ColorSensor(Port.A)
     sensor_ultrassonico = UltrasonicSensor(Port.E)
-    motor_esquerdo = Motor(Port.C, Direction.CLOCKWISE)
-    motor_direito = Motor(Port.D, Direction.COUNTERCLOCKWISE)
+    motor_esquerdo = Motor(Port.D, Direction.COUNTERCLOCKWISE)
+    motor_direito = Motor(Port.C, Direction.CLOCKWISE)

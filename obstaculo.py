@@ -1,7 +1,7 @@
 from pybricks.tools import wait
 from robo import LIMIAR_BRANCO, LIMIAR_PRETO
 
-# 1 = direita, -1 = esquerda
+# 1 = esquerda, -1 = direita
 def desviar_obstaculo(direcao, robo):
     robo.motor_esquerdo.run(-200)
     robo.motor_direito.run(-200)
@@ -14,7 +14,7 @@ def desviar_obstaculo(direcao, robo):
     # 2. Girar 90° para a esquerda
     robo.motor_esquerdo.run(-200 * direcao)
     robo.motor_direito.run(200 * direcao)
-    wait(1100)  # Ajuste este tempo conforme necessário para 90°
+    wait(1250)  # Ajuste este tempo conforme necessário para 90°
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
@@ -30,7 +30,7 @@ def desviar_obstaculo(direcao, robo):
     # 4. Girar 90° para a direita
     robo.motor_esquerdo.run(200 * direcao)
     robo.motor_direito.run(-200 * direcao)
-    wait(1100)  # Ajuste este tempo conforme necessário para 90°
+    wait(1250)  # Ajuste este tempo conforme necessário para 90°
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
@@ -46,7 +46,7 @@ def desviar_obstaculo(direcao, robo):
     # 6. Girar 90° para a direita novamente
     robo.motor_esquerdo.run(200 * direcao)
     robo.motor_direito.run(-200 * direcao)
-    wait(1100)  # Ajuste este tempo conforme necessário para 90°
+    wait(1250)  # Ajuste este tempo conforme necessário para 90°
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
@@ -67,7 +67,7 @@ def desviar_obstaculo(direcao, robo):
     robo.motor_direito.stop()
     robo.motor_esquerdo.run(-200 * direcao)
     robo.motor_direito.run(200 * direcao)
-    wait(1100)
+    wait(1250)
 
 
 def verificar_obstaculo(robo, stopwatch):
@@ -82,7 +82,7 @@ def verificar_obstaculo(robo, stopwatch):
             robo.motor_esquerdo.stop()
             robo.motor_direito.stop()
             wait(500)
-            desviar_obstaculo(1, robo)
+            desviar_obstaculo(-1, robo)
             stopwatch.reset()
             break
         wait(50)
