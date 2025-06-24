@@ -31,14 +31,14 @@ def verificar_cores(robo):
         return True
     elif verde_esq and verde_dir:
         # Meia volta
-        a = verificarVerdeFalso(s1, v1, s2, v2)
+        a = verificarVerdeFalso(s1, v1, s2, v2, robo)
         if a:
             robo.motor_esquerdo.run(200)
             robo.motor_direito.run(-200)
             wait(1800)
     elif verde_esq:
         # Vira para a esquerda
-        a = verificarVerdeFalso(s1, v1, s2, v2)
+        a = verificarVerdeFalso(s1, v1, s2, v2, robo)
         if a:
             robo.motor_esquerdo.run(0)
             robo.motor_direito.run(0)
@@ -54,7 +54,7 @@ def verificar_cores(robo):
             wait(1000)
     elif verde_dir:
         # Vira para a direita
-        a = verificarVerdeFalso(s1, v1, s2, v2)
+        a = verificarVerdeFalso(s1, v1, s2, v2, robo)
         if a:
             robo.motor_esquerdo.run(0)
             robo.motor_direito.run(0)

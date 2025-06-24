@@ -14,7 +14,11 @@ stopwatch = StopWatch()
 # Variável para controle de tempo
 tempo_anterior = 0
 
+branco = robo.sensor_direito.reflection()
+preto = robo.sensor_esquerdo.reflection()
 
+LIMIAR_BRANCO = branco - (branco - preto) / 10
+LIMIAR_PRETO = preto + (branco - preto) / 10
 
 # Loop principal
 while True:
@@ -29,13 +33,13 @@ while True:
         # Curva fechada para a esquerda
         robo.motor_esquerdo.run(-robo.velocidade_base)
         robo.motor_direito.run(robo.velocidade_base)
-        wait(100)  # Ajuste esse valor conforme necessário
+        wait(10)  # Ajuste esse valor conforme necessário
         continue
     elif leitura_dir < LIMIAR_PRETO and leitura_esq > LIMIAR_BRANCO:
         # Curva fechada para a direita
         robo.motor_esquerdo.run(robo.velocidade_base)
         robo.motor_direito.run(-robo.velocidade_base)
-        wait(100)  # Ajuste esse valor conforme necessário
+        wait(10)  # Ajuste esse valor conforme necessário
         continue
     pid(leitura_dir, leitura_esq, robo)
 
