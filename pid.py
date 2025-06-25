@@ -2,11 +2,10 @@ from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import ColorSensor, Motor, UltrasonicSensor
 from pybricks.parameters import Port, Direction
 from pybricks.tools import wait, StopWatch
-import robo
-from robo import LIMIAR_BRANCO, LIMIAR_PRETO
+import robot
 
 def pid(leitura_dir, leitura_esq, robo):
-    erro = leitura_dir - leitura_esq
+    erro = leitura_dir - leitura_esq - robot.valor_calibragem
 
     robo.integral += erro
     derivada = erro - robo.erro_anterior
@@ -20,13 +19,13 @@ def pid(leitura_dir, leitura_esq, robo):
     robo.motor_direito.run(velocidade_dir)
 
 def curva_reta(leitura_esq, leitura_dir, robo):
-    if leitura_esq < LIMIAR_PRETO and leitura_dir > LIMIAR_BRANCO:
+    if leitura_esq < robot.limiar_preto and leitura_dir > robot.limiar_branco:
         # Curva fechada para a esquerda
         robo.motor_esquerdo.run(-robo.velocidade_base)
         robo.motor_direito.run(robo.velocidade_base)
         wait(100)  # Ajuste esse valor conforme necessário
         return True
-    elif leitura_dir < LIMIAR_PRETO and leitura_esq > LIMIAR_BRANCO:
+    elif leitura_dir < robot.limiar_preto and leitura_esq > robot.limiar_branco:
         # Curva fechada para a direita
         robo.motor_esquerdo.run(robo.velocidade_base)
         robo.motor_direito.run(-robo.velocidade_base)

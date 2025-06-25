@@ -1,5 +1,5 @@
 from pybricks.tools import wait
-from robo import LIMIAR_BRANCO, LIMIAR_PRETO
+import robot
 
 # 1 = esquerda, -1 = direita
 def desviar_obstaculo(direcao, robo):
@@ -59,7 +59,7 @@ def desviar_obstaculo(direcao, robo):
         leitura_dir = robo.sensor_direito.reflection()
         leitura_esq = robo.sensor_esquerdo.reflection()
         print(f'E:{leitura_esq}, D:{leitura_dir}')
-        a = leitura_dir < LIMIAR_PRETO or leitura_esq < LIMIAR_PRETO
+        a = leitura_dir < robot.limiar_preto or leitura_esq < robot.limiar_branco
         wait(20)
     # Verifica se encontrou a linha novamente
     
