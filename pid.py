@@ -6,7 +6,7 @@ import robot
 
 def pid(leitura_dir, leitura_esq, robo):
     pre_erro = leitura_dir - leitura_esq
-    erro = pre_erro if pre_erro < 5 else 0
+    erro = pre_erro if abs(pre_erro) > 3 else 0
     
     robo.integral += erro
     derivada = erro - robo.erro_anterior
