@@ -12,9 +12,11 @@ def desviar_obstaculo(direcao, robo):
     wait(500)
     
     # 2. Girar 90° para a esquerda
+    robo.hub.imu.reset_heading(0)
     robo.motor_esquerdo.run(-200 * direcao)
     robo.motor_direito.run(200 * direcao)
-    wait(1250)  # Ajuste este tempo conforme necessário para 90°
+    while(abs(robo.hub.imu.heading()) < 90):
+        pass
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
@@ -22,15 +24,17 @@ def desviar_obstaculo(direcao, robo):
     # 3. Seguir reto por um tempo (aproximadamente 15cm)
     robo.motor_esquerdo.run(200)
     robo.motor_direito.run(200)
-    wait(1600)  # Ajuste este tempo conforme necessário
+    wait(2400)  # Ajuste este tempo conforme necessário
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
     
     # 4. Girar 90° para a direita
+    robo.hub.imu.reset_heading(0)
     robo.motor_esquerdo.run(200 * direcao)
     robo.motor_direito.run(-200 * direcao)
-    wait(1250)  # Ajuste este tempo conforme necessário para 90°
+    while(abs(robo.hub.imu.heading()) < 90):
+        pass
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
@@ -38,15 +42,17 @@ def desviar_obstaculo(direcao, robo):
     # 5. Seguir reto por um tempo (aproximadamente 15cm)
     robo.motor_esquerdo.run(200)
     robo.motor_direito.run(200)
-    wait(3600)  # Ajuste este tempo conforme necessário
+    wait(4200)  # Ajuste este tempo conforme necessário
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
     
     # 6. Girar 90° para a direita novamente
+    robo.hub.imu.reset_heading(0)
     robo.motor_esquerdo.run(200 * direcao)
     robo.motor_direito.run(-200 * direcao)
-    wait(1250)  # Ajuste este tempo conforme necessário para 90°
+    while(abs(robo.hub.imu.heading()) < 90):
+        pass
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
@@ -55,22 +61,27 @@ def desviar_obstaculo(direcao, robo):
     robo.motor_esquerdo.run(100)
     robo.motor_direito.run(100)
     a = False
+    # Verifica se encontrou a linha novamente
     while(not a):
         leitura_dir = robo.sensor_direito.reflection()
         leitura_esq = robo.sensor_esquerdo.reflection()
         print(f'E:{leitura_esq}, D:{leitura_dir}')
-        a = leitura_dir < robot.limiar_preto or leitura_esq < robot.limiar_branco
+        a = leitura_dir < robo.limiar_preto or leitura_esq < robo.limiar_preto
         wait(20)
-    # Verifica se encontrou a linha novamente
+
+    robo.motor_esquerdo.run(100)
+    robo.motor_direito.run(100)
+    wait(1800)
     
-    robo.motor_esquerdo.stop()
-    robo.motor_direito.stop()
+
+    robo.hub.imu.reset_heading(0)
     robo.motor_esquerdo.run(-200 * direcao)
     robo.motor_direito.run(200 * direcao)
-    wait(1250)
+    while(abs(robo.hub.imu.heading()) < 90):
+        pass
 
-
-def verificar_obstaculo(robo, stopwatch):
+# -1 direita, 1 esquerda
+def verificar_obstaculo(stopwatch, robo):
     distancia = robo.sensor_ultrassonico.distance()
     verificadas = 0
     while distancia < 80:
@@ -82,7 +93,7 @@ def verificar_obstaculo(robo, stopwatch):
             robo.motor_esquerdo.stop()
             robo.motor_direito.stop()
             wait(500)
-            desviar_obstaculo(-1, robo)
+            desviar_obstaculo(1, robo)
             stopwatch.reset()
             break
         wait(50)

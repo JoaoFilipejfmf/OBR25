@@ -16,7 +16,7 @@ def verificarVerdeFalso(robo, sensor):
         reflet = sensor.reflection()
         s1 = robo.sensor_esquerdo.hsv()[1]
         s2 = robo.sensor_direito.hsv()[1]
-        if (s1 < 10 and s2 < 10) and (reflet < robot.limiar_preto):
+        if (s1 < 10 and s2 < 10) and (reflet < robo.limiar_preto):
             return True
         wait(50)
     return False
@@ -55,7 +55,7 @@ def verificar_cores(robo):
             robo.motor_esquerdo.run(200)
             robo.motor_direito.run(-200)
             while(abs(robo.hub.imu.heading()) < 175):
-                print(f'{abs(robo.hub.imu.heading())}')
+                wait(10)
     elif verde_esq:
         # Vira para a esquerda
         a = verificarVerdeFalso(robo, robo.sensor_esquerdo)

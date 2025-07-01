@@ -19,8 +19,8 @@ tempo_anterior = 0
 branco = robo.sensor_direito.reflection()
 preto = robo.sensor_esquerdo.reflection()
 
-robot.limiar_branco = branco - (branco - preto) / 5
-robot.limiar_preto = preto + (branco - preto) / 5
+robo.limiar_branco = branco - (branco - preto) / 5
+robo.limiar_preto = preto + (branco - preto) / 5
 RESGATE = branco * 1.2
 
 while not robo.hub.imu.ready():
@@ -47,13 +47,13 @@ while True:
         robo.hub.display.icon(Icon.HEART / 2)
     else:
         robo.hub.display.icon(Icon.CIRCLE / 2)
-    # if leitura_esq < robot.limiar_preto and leitura_dir > robot.limiar_branco:
+    # if leitura_esq < robo.limiar_preto and leitura_dir > robo.limiar_branco:
     #     # Curva fechada para a esquerda
     #     robo.motor_esquerdo.run(-robo.velocidade_base)
     #     robo.motor_direito.run(robo.velocidade_base)
     #     wait(10)  # Ajuste esse valor conforme necessário
     #     continue
-    # elif leitura_dir < robot.limiar_preto and leitura_esq > robot.limiar_branco:
+    # elif leitura_dir < robo.limiar_preto and leitura_esq > robo.limiar_branco:
     #     # Curva fechada para a direita
     #     robo.motor_esquerdo.run(robo.velocidade_base)
     #     robo.motor_direito.run(-robo.velocidade_base)
@@ -68,10 +68,5 @@ while True:
         stopwatch.reset()
 
     wait(10)
-
-
-
-
-
 
 #Em Nome de Jesus!!!!    
