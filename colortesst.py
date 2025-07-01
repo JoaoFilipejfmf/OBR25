@@ -11,5 +11,5 @@ sensor_direito = ColorSensor(Port.B)
 while True:
     h1, s1, v1 = sensor_esquerdo.hsv()
     h2, s2, v2 = sensor_direito.hsv()
-    print(f'E: {h1:3d}, {s1:3d}, {v1:3d}, {sensor_esquerdo.reflection():3d} || D: {h2:3d}, {s2:3d}, {v2:3d}, {sensor_direito.reflection():3d}')
+    print(f'Esquerdo - H: {h1:3d}, S: {s1:3d}, V: {v1:3d}, Ref: {sensor_esquerdo.reflection():3d} || Direito - H: {h2:3d}, S: {s2:3d}, V: {v2:3d}, Ref: {sensor_direito.reflection():3d}')
     wait(10)
