@@ -7,9 +7,9 @@ valor_calibragem = 0
 class Robo:
     limiar_branco = 0
     limiar_preto = 0
-    Kp = 9
-    Ki = .05
-    Kd = .5
+    Kp = 7
+    Ki = 0
+    Kd = 0
     velocidade_base = 100
     integral = 0
     erro_anterior = 0
