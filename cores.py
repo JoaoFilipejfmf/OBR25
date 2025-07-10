@@ -12,7 +12,7 @@ def verificarVerdeFalso(robo, sensor):
     wait(500)
     robo.motor_direito.run(50)
     robo.motor_esquerdo.run(50)
-    for i in range(30):
+    for i in range(50):
         reflet = sensor.reflection()
         s1 = robo.sensor_esquerdo.hsv()[1]
         s2 = robo.sensor_direito.hsv()[1]
@@ -27,26 +27,35 @@ def verificarVerdeDuploFalso(robo):
     wait(500)
     robo.motor_direito.run(50)
     robo.motor_esquerdo.run(50)
-    for i in range(30):
+    for i in range(50):
         r1 = robo.sensor_esquerdo.reflection()
         r2 = robo.sensor_direito.reflection()
         s1 = robo.sensor_esquerdo.hsv()[1]
         s2 = robo.sensor_direito.hsv()[1]
-        if (s1 < 10 and s2 < 10) and (r1 < robot.limiar_preto and r2 < robot.limiar_preto):
+        if (s1 < 10 and s2 < 10) and (r1 < robo.limiar_preto and r2 < robo.limiar_preto):
             return True
         wait(50)
     return False
 
 def verificar_cores(robo):
+    if robo.sensor_esquerdo.hsv()[1] < 30 and robo.sensor_direito.hsv()[1] < 30:
+        return -1
+    robo.motor_esquerdo.stop()
+    robo.motor_direito.stop()
+    for i in range(20):
+        if robo.sensor_esquerdo.hsv()[1] < 30 and robo.sensor_direito.hsv()[1] < 30:
+            return -1
+        wait(100)
     h1, s1, v1 = robo.sensor_esquerdo.hsv()
     h2, s2, v2 = robo.sensor_direito.hsv()
     verde_esq = detectar_verde(h1, s1, robo)
     verde_dir = detectar_verde(h2, s2, robo)
     vermelho = detectar_vermelho(h1, s1, robo) and detectar_vermelho(h2, s2, robo)
     if vermelho:
+        print('legal')
         robo.motor_esquerdo.stop()
         robo.motor_direito.stop()
-        return True
+        return 1
     elif verde_esq and verde_dir:
         # Meia volta
         a = verificarVerdeDuploFalso(robo)
@@ -65,7 +74,7 @@ def verificar_cores(robo):
             wait(1000)
             robo.motor_esquerdo.run(100)
             robo.motor_direito.run(100)
-            wait(1200)
+            wait(750)
             robo.hub.imu.reset_heading(0)
             robo.motor_esquerdo.run(-100)
             robo.motor_direito.run(100)
@@ -83,7 +92,7 @@ def verificar_cores(robo):
             wait(1000)
             robo.motor_esquerdo.run(100)
             robo.motor_direito.run(100)
-            wait(1200)
+            wait(750)
             robo.hub.imu.reset_heading(0)
             robo.motor_esquerdo.run(100)
             robo.motor_direito.run(-100)

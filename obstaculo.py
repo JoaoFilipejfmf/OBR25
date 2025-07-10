@@ -42,7 +42,7 @@ def desviar_obstaculo(direcao, robo):
     # 5. Seguir reto por um tempo (aproximadamente 15cm)
     robo.motor_esquerdo.run(200)
     robo.motor_direito.run(200)
-    wait(4200)  # Ajuste este tempo conforme necessário
+    wait(4800)  # Ajuste este tempo conforme necessário
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
@@ -71,7 +71,7 @@ def desviar_obstaculo(direcao, robo):
 
     robo.motor_esquerdo.run(100)
     robo.motor_direito.run(100)
-    wait(1800)
+    wait(1000)
     
 
     robo.hub.imu.reset_heading(0)

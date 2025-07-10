@@ -21,7 +21,7 @@ preto = robo.sensor_esquerdo.reflection()
 
 robo.limiar_branco = branco - (branco - preto) / 5
 robo.limiar_preto = preto + (branco - preto) / 5
-RESGATE = branco * 1.2
+RESGATE = branco * 1.33
 
 while not robo.hub.imu.ready():
     wait(100)
@@ -63,10 +63,9 @@ while True:
 
     # === HSV (a cada 250ms) ===
     if stopwatch.time() >= 150:
-        if(verificar_cores(robo)):
+        if(verificar_cores(robo) == 1):
             break
         stopwatch.reset()
-
     wait(10)
 
 #Em Nome de Jesus!!!!    
