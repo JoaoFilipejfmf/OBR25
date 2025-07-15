@@ -5,8 +5,7 @@ from pybricks.tools import wait, StopWatch
 import robot
 
 def pid(leitura_dir, leitura_esq, robo):
-    pre_erro = leitura_dir - leitura_esq
-    erro = pre_erro if abs(pre_erro) > 5 else 0
+    erro = leitura_dir - leitura_esq - robo.valor_calibragem
     
     robo.integral += erro
     derivada = erro - robo.erro_anterior

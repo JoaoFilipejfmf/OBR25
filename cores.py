@@ -12,13 +12,14 @@ def verificarVerdeFalso(robo, sensor):
     wait(500)
     robo.motor_direito.run(50)
     robo.motor_esquerdo.run(50)
-    for i in range(50):
+    for i in range(400):
         reflet = sensor.reflection()
         s1 = robo.sensor_esquerdo.hsv()[1]
         s2 = robo.sensor_direito.hsv()[1]
-        if (s1 < 10 and s2 < 10) and (reflet < robo.limiar_preto):
+        print(f'{s1}, {s2}, {reflet}')
+        if (s1 < 20 and s2 < 20) and (reflet < robo.limiar_preto):
             return True
-        wait(50)
+        wait(10)
     return False
 
 def verificarVerdeDuploFalso(robo):
@@ -27,14 +28,14 @@ def verificarVerdeDuploFalso(robo):
     wait(500)
     robo.motor_direito.run(50)
     robo.motor_esquerdo.run(50)
-    for i in range(50):
+    for i in range(400):
         r1 = robo.sensor_esquerdo.reflection()
         r2 = robo.sensor_direito.reflection()
         s1 = robo.sensor_esquerdo.hsv()[1]
         s2 = robo.sensor_direito.hsv()[1]
-        if (s1 < 10 and s2 < 10) and (r1 < robo.limiar_preto and r2 < robo.limiar_preto):
+        if (s1 < 20 and s2 < 20) and (r1 < robo.limiar_preto and r2 < robo.limiar_preto):
             return True
-        wait(50)
+        wait(10)
     return False
 
 def verificar_cores(robo):
@@ -74,7 +75,7 @@ def verificar_cores(robo):
             wait(1000)
             robo.motor_esquerdo.run(100)
             robo.motor_direito.run(100)
-            wait(750)
+            wait(2000)
             robo.hub.imu.reset_heading(0)
             robo.motor_esquerdo.run(-100)
             robo.motor_direito.run(100)
@@ -92,7 +93,7 @@ def verificar_cores(robo):
             wait(1000)
             robo.motor_esquerdo.run(100)
             robo.motor_direito.run(100)
-            wait(750)
+            wait(2000)
             robo.hub.imu.reset_heading(0)
             robo.motor_esquerdo.run(100)
             robo.motor_direito.run(-100)

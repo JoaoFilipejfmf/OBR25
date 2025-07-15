@@ -16,8 +16,8 @@ stopwatch_cal = StopWatch()
 # Variável para controle de tempo
 tempo_anterior = 0
 
-branco = robo.sensor_direito.reflection()
-preto = robo.sensor_esquerdo.reflection()
+branco = robo.sensor_direito.hsv()[2]
+preto = robo.sensor_esquerdo.hsv()[2]
 
 robo.limiar_branco = branco - (branco - preto) / 5
 robo.limiar_preto = preto + (branco - preto) / 5
@@ -28,6 +28,28 @@ while not robo.hub.imu.ready():
 
 robo.hub.imu.reset_heading(0)
 
+def calibrar():
+    robo.hub.imu.reset_heading(0)
+    robo.motor_direito.run(100)
+    robo.motor_esquerdo.run(100)
+    wait(3300)
+    robo.motor_direito.run(-100)
+    robo.motor_esquerdo.run(100)
+    while(abs(robo.hub.imu.heading()) < 90):
+        pass
+    for i in range(50):
+        robo.valor_calibragem += robo.sensor_direito.reflection() - robo.sensor_esquerdo.reflection()
+    print(robo.valor_calibragem)
+    robo.valor_calibragem /= 50.0
+    print(robo.valor_calibragem)
+    robo.hub.imu.reset_heading(0)
+    robo.motor_direito.run(100)
+    robo.motor_esquerdo.run(-100)
+    while(abs(robo.hub.imu.heading()) < 90):
+        pass
+
+calibrar()
+
 # Loop principal
 while True:
     # Verifica distância do obstáculo
@@ -35,13 +57,10 @@ while True:
         verificar_obstaculo(stopwatch=stopwatch, robo=robo)
 
     # === PID ===
-    leitura_esq = robo.sensor_esquerdo.reflection()
-    leitura_dir = robo.sensor_direito.reflection()
-
-    if stopwatch_cal.time() > 2000:
-        robot.valor_calibragem = leitura_dir - leitura_esq
-        stopwatch_cal.reset()
-        stopwatch_cal.pause()
+    hsv_esq = robo.sensor_esquerdo.hsv()
+    hsv_dir = robo.sensor_direito.hsv()
+    leitura_esq = hsv_esq[2]
+    leitura_dir = hsv_dir[2]
 
     if leitura_dir > RESGATE and leitura_esq > RESGATE:
         robo.hub.display.icon(Icon.HEART / 2)
@@ -62,10 +81,9 @@ while True:
     pid(leitura_dir, leitura_esq, robo)
 
     # === HSV (a cada 250ms) ===
-    if stopwatch.time() >= 150:
+    if hsv_dir[1] >= 30 or hsv_esq[1] >= 30:
         if(verificar_cores(robo) == 1):
             break
-        stopwatch.reset()
-    wait(10)
+    wait(5)
 
 #Em Nome de Jesus!!!!    

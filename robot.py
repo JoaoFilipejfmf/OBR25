@@ -2,15 +2,15 @@ from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import ColorSensor, Motor, UltrasonicSensor
 from pybricks.parameters import Port, Direction
 
-valor_calibragem = 0
 # Inicialização
 class Robo:
+    valor_calibragem = 0
     limiar_branco = 0
     limiar_preto = 0
     Kp = 8.5
     Ki = 0
     Kd = 0
-    velocidade_base = 100
+    velocidade_base = 140
     integral = 0
     erro_anterior = 0
     hub = PrimeHub()
