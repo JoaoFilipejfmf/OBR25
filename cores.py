@@ -39,8 +39,6 @@ def verificarVerdeDuploFalso(robo):
     return False
 
 def verificar_cores(robo):
-    if robo.sensor_esquerdo.hsv()[1] < 30 and robo.sensor_direito.hsv()[1] < 30:
-        return -1
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     for i in range(20):

@@ -7,10 +7,11 @@ class Robo:
     valor_calibragem = 0
     limiar_branco = 0
     limiar_preto = 0
-    Kp = 8.5
+    resgate = 0
+    Kp = 14.5
     Ki = 0
     Kd = 0
-    velocidade_base = 140
+    velocidade_base = 100
     integral = 0
     erro_anterior = 0
     hub = PrimeHub()
