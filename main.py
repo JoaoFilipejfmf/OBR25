@@ -6,6 +6,7 @@ from pid import pid, curva_reta
 from obstaculo import verificar_obstaculo, desviar_obstaculo
 from cores import verificar_cores
 from init import calibrar
+from resgateseguidor import mapear
 import robot
 
 robo = robot.Robo()
@@ -28,9 +29,9 @@ while True:
 
     # === Resgate ===
     if leitura_dir > robo.resgate and leitura_esq > robo.resgate:
-        robo.hub.display.icon(Icon.HEART / 2)
-    else:
         robo.hub.display.icon(Icon.CIRCLE / 2)
+        mapear(robo)
+        
     
     # if leitura_esq < robo.limiar_preto and leitura_dir > robo.limiar_branco:
     #     # Curva fechada para a esquerda

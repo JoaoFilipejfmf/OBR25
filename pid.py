@@ -32,3 +32,45 @@ def curva_reta(leitura_esq, leitura_dir, robo):
         robo.motor_direito.run(-robo.velocidade_base)
         wait(100)  # Ajuste esse valor conforme necessário
         return True
+    
+def girar_angulo(robo, angulo_desejado):
+    """
+    Gira o robô no lugar usando o giroscópio e controle proporcional.
+    
+    Parâmetros:
+    - robo: objeto do robô com motores 'motor_esquerdo', 'motor_direito' e 'hub.imu'.
+    - angulo_desejado: ângulo a girar em graus (positivo = horário, negativo = anti-horário)
+    """
+
+    # Resetar o heading para referência zero
+    robo.hub.imu.reset_heading(0)
+
+    # Controle proporcional
+    Kp = 2.0
+    VELOCIDADE_MAX = 100
+    VELOCIDADE_MIN = 50
+    TOLERANCIA = .4  # grau de tolerância para parar
+
+    while True:
+        erro = angulo_desejado - robo.hub.imu.heading()
+
+        if abs(erro) < TOLERANCIA:
+            break
+
+        velocidade = Kp * erro
+
+        # Limitar velocidade
+        if velocidade > 0:
+            velocidade = max(min(velocidade, VELOCIDADE_MAX), VELOCIDADE_MIN)
+        else:
+            velocidade = min(max(velocidade, -VELOCIDADE_MAX), -VELOCIDADE_MIN)
+
+        # Aplicar velocidade nos motores (giro no lugar)
+        robo.motor_esquerdo.run(velocidade)
+        robo.motor_direito.run(-velocidade)
+
+        wait(10)
+
+    # Parar os motores ao final
+    robo.motor_esquerdo.stop()
+    robo.motor_direito.stop()

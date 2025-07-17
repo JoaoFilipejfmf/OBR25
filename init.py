@@ -27,25 +27,21 @@ def calibrar(robo):
     wait(1000)
     robo.motor_direito.run(-100)
     robo.motor_esquerdo.run(100)
-    while(abs(robo.hub.imu.heading()) < 90):
+    while(abs(robo.hub.imu.heading()) < 30):
         pass
-    robo.motor_direito.run(100)
-    robo.motor_esquerdo.run(100)
-    wait(1000)
 
     # Ao invés de fazer uma leitura simples, fazemos uma média simples de 50 leituras para garantir que seja o erro médio central
     for i in range(50):
         robo.valor_calibragem += robo.sensor_direito.reflection() - robo.sensor_esquerdo.reflection()
         wait(10)
-    print(robo.valor_calibragem)
     robo.valor_calibragem /= 50.0
-    print(robo.valor_calibragem)
 
-    robo.motor_direito.run(-100)
-    robo.motor_esquerdo.run(-100)
-    wait(1500)
+    robo.motor_direito.run(-250)
+    robo.motor_esquerdo.run(-250)
+    wait(400)
+
     robo.hub.imu.reset_heading(0)
     robo.motor_direito.run(100)
     robo.motor_esquerdo.run(-100)
-    while(abs(robo.hub.imu.heading()) < 90):
+    while(abs(robo.hub.imu.heading()) < 30):
         pass
