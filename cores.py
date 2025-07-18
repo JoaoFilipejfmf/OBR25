@@ -1,10 +1,10 @@
 from pybricks.tools import wait
 import robot
 def detectar_verde(h, s, robo):
-    return 100 <= h <= 140 and s > 30
+    return 60 <= h <= 180 and s > 50
 
 def detectar_vermelho(h, s, robo):
-    return (0 <= h <= 20 or 340 <= h <= 360) and s > 30
+    return (0 <= h <= 60 or 300 <= h <= 360) and s > 50
 
 def verificarVerdeFalso(robo, sensor):
     robo.motor_direito.stop()
@@ -16,8 +16,7 @@ def verificarVerdeFalso(robo, sensor):
         reflet = sensor.reflection()
         s1 = robo.sensor_esquerdo.hsv()[1]
         s2 = robo.sensor_direito.hsv()[1]
-        print(f'{s1}, {s2}, {reflet}')
-        if (s1 < 20 and s2 < 20) and (reflet < robo.limiar_preto):
+        if (s1 < 40 and s2 < 40) and (reflet < robo.limiar_preto):
             return True
         wait(10)
     return False
@@ -33,7 +32,7 @@ def verificarVerdeDuploFalso(robo):
         r2 = robo.sensor_direito.reflection()
         s1 = robo.sensor_esquerdo.hsv()[1]
         s2 = robo.sensor_direito.hsv()[1]
-        if (s1 < 20 and s2 < 20) and (r1 < robo.limiar_preto and r2 < robo.limiar_preto):
+        if (s1 < 40 and s2 < 40) and (r1 < robo.limiar_preto and r2 < robo.limiar_preto):
             return True
         wait(10)
     return False
@@ -51,10 +50,9 @@ def verificar_cores(robo):
     verde_dir = detectar_verde(h2, s2, robo)
     vermelho = detectar_vermelho(h1, s1, robo) and detectar_vermelho(h2, s2, robo)
     if vermelho:
-        print('legal')
         robo.motor_esquerdo.stop()
         robo.motor_direito.stop()
-        return 1
+        wait(7500)
     elif verde_esq and verde_dir:
         # Meia volta
         a = verificarVerdeDuploFalso(robo)
