@@ -12,9 +12,10 @@ class Robo:
         self.Kp = 16
         self.Ki = 0
         self.Kd = 0
-        self.velocidade_base = 120
+        self.velocidade_base = 200
         self.integral = 0
         self.erro_anterior = 0
+        self.erros = []
         self.hub = PrimeHub()
         self.sensor_esquerdo = ColorSensor(Port.A)
         self.sensor_direito = ColorSensor(Port.B)

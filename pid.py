@@ -4,10 +4,18 @@ from pybricks.parameters import Port, Direction
 from pybricks.tools import wait, StopWatch
 import robot
 
-def pid(leitura_dir, leitura_esq, robo):
-    pre_erro = leitura_dir - leitura_esq - robo.valor_calibragem
+def pid(leitura_dir, leitura_esq, robo : robot.Robo):
+    pre_erro = leitura_dir - leitura_esq
     erro = pre_erro if abs(pre_erro) > 4 else 0
     
+    robo.erros.append(erro)
+    if len(robo.erros) >= 40:
+        robo.erros.pop(0)
+    
+    soma_erros = (sum((i + 1)**(7/6) * abs(valor) for i, valor in enumerate(robo.erros)))
+    robo.velocidade_base = max(60, 200 - soma_erros / 200)
+    print(f'{erro}, {robo.velocidade_base}')
+
     robo.integral += erro
     derivada = erro - robo.erro_anterior
     correcao = robo.Kp * erro + robo.Ki * robo.integral + robo.Kd * derivada

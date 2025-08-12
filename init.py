@@ -1,6 +1,9 @@
 from pybricks.tools import wait
+from pybricks.parameters import Icon
+from robot import Robo
 
-def calibrar(robo):
+def calibrar(robo: Robo):
+    robo.hub.display.icon(Icon.SQUARE)
     robo.sensor_direito.lights.off()
     robo.sensor_esquerdo.lights.off()
     while not robo.hub.imu.ready():
