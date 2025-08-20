@@ -1,4 +1,5 @@
 from pybricks.tools import wait
+from pid import girar_angulo
 from pybricks.parameters import Icon
 from robot import Robo
 
@@ -26,14 +27,11 @@ def calibrar(robo: Robo):
     # Após isso, fazemos a leitura do branco em ambos os sensores e calculamos a diferença da leitura entre eles
     # Esse valor será considerado no algoritmo PID
 
-    robo.hub.imu.reset_heading(0)
+    girar_angulo(robo, 30)
+
     robo.motor_direito.run(100)
     robo.motor_esquerdo.run(100)
     wait(1000)
-    robo.motor_direito.run(-100)
-    robo.motor_esquerdo.run(100)
-    while(abs(robo.hub.imu.heading()) < 30):
-        pass
 
     # Ao invés de fazer uma leitura simples, fazemos uma média simples de 50 leituras para garantir que seja o erro médio central
     for i in range(50):
@@ -41,12 +39,8 @@ def calibrar(robo: Robo):
         wait(10)
     robo.valor_calibragem /= 50.0
 
-    robo.motor_direito.run(-250)
-    robo.motor_esquerdo.run(-250)
-    wait(400)
+    robo.motor_direito.run(-200)
+    robo.motor_esquerdo.run(-200)
+    wait(1400)
 
-    robo.hub.imu.reset_heading(0)
-    robo.motor_direito.run(100)
-    robo.motor_esquerdo.run(-100)
-    while(abs(robo.hub.imu.heading()) < 30):
-        pass
+    girar_angulo(robo, -30)

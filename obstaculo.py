@@ -1,60 +1,43 @@
 from pybricks.tools import wait
+from pid import girar_angulo
 import robot
 
 # 1 = esquerda, -1 = direita
-def desviar_obstaculo(direcao, robo):
+def desviar_obstaculo(direcao, robo: robot.Robo):
     robo.motor_esquerdo.run(-200)
     robo.motor_direito.run(-200)
-    wait(200)
+    wait(750)
     # 1. Parar por um momento
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(500)
     
     # 2. Girar 90° para a esquerda
-    robo.hub.imu.reset_heading(0)
-    robo.motor_esquerdo.run(-200 * direcao)
-    robo.motor_direito.run(200 * direcao)
-    while(abs(robo.hub.imu.heading()) < 90):
-        pass
-    robo.motor_esquerdo.stop()
-    robo.motor_direito.stop()
+    girar_angulo(robo, -90)
     wait(200)
     
     # 3. Seguir reto por um tempo (aproximadamente 15cm)
     robo.motor_esquerdo.run(200)
     robo.motor_direito.run(200)
-    wait(2400)  # Ajuste este tempo conforme necessário
+    wait(2800)  # Ajuste este tempo conforme necessário
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
     
     # 4. Girar 90° para a direita
-    robo.hub.imu.reset_heading(0)
-    robo.motor_esquerdo.run(200 * direcao)
-    robo.motor_direito.run(-200 * direcao)
-    while(abs(robo.hub.imu.heading()) < 90):
-        pass
-    robo.motor_esquerdo.stop()
-    robo.motor_direito.stop()
+    girar_angulo(robo, 90)
     wait(200)
     
     # 5. Seguir reto por um tempo (aproximadamente 15cm)
     robo.motor_esquerdo.run(200)
     robo.motor_direito.run(200)
-    wait(4800)  # Ajuste este tempo conforme necessário
+    wait(5900)  # Ajuste este tempo conforme necessário
     robo.motor_esquerdo.stop()
     robo.motor_direito.stop()
     wait(200)
     
     # 6. Girar 90° para a direita novamente
-    robo.hub.imu.reset_heading(0)
-    robo.motor_esquerdo.run(200 * direcao)
-    robo.motor_direito.run(-200 * direcao)
-    while(abs(robo.hub.imu.heading()) < 90):
-        pass
-    robo.motor_esquerdo.stop()
-    robo.motor_direito.stop()
+    girar_angulo(robo, 90)
     wait(200)
     
     # 7. Seguir reto até reencontrar a pista
@@ -74,11 +57,11 @@ def desviar_obstaculo(direcao, robo):
     wait(1000)
     
 
-    robo.hub.imu.reset_heading(0)
-    robo.motor_esquerdo.run(-200 * direcao)
-    robo.motor_direito.run(200 * direcao)
-    while(abs(robo.hub.imu.heading()) < 90):
-        pass
+    girar_angulo(robo, -90)
+
+    robo.motor_esquerdo.run(-150)
+    robo.motor_direito.run(-150)
+    wait(1000)
 
 # -1 direita, 1 esquerda
 def verificar_obstaculo(stopwatch, robo):

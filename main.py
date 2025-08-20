@@ -19,6 +19,8 @@ NUM_RESGATE = 150
 contador_resgate = NUM_RESGATE
 pitchs = []
 
+
+
 calibrar(robo)
 print(robo.resgate)
 robo.hub.display.icon(Icon.CIRCLE)
