@@ -9,12 +9,12 @@ def pid(leitura_dir, leitura_esq, robo : robot.Robo):
     erro = pre_erro if abs(pre_erro) > 4 else 0
     
     robo.erros.append(erro)
-    if len(robo.erros) >= 100:
+    if len(robo.erros) >= 90:
         robo.erros.pop(0)
     
     soma_erros = (sum((i + 1)**(4/3) * abs(valor) for i, valor in enumerate(robo.erros)))
-    robo.velocidade_base = max(100, 240 - soma_erros / 1000)
-    print(f'{erro}, {robo.velocidade_base}, {240 - soma_erros / 500}')
+    robo.velocidade_base = max(80, 200 - soma_erros / 500)
+    print(f'{erro}, {robo.velocidade_base}, {200 - soma_erros / 500}')
 
     robo.integral += erro
     derivada = erro - robo.erro_anterior
