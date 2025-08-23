@@ -34,8 +34,10 @@ def mapear_z_esquerda(robo: Robo):
     girar_angulo(robo, 20)
     robo.motor_direito.run(80)
     robo.motor_esquerdo.run(-80)
-    while(robo.sensor_esquerdo.reflection() > robo.limiar_preto and robo.sensor_direito.reflection() > robo.limiar_preto):
+    counter = 0
+    while((robo.sensor_esquerdo.reflection() > robo.limiar_preto and robo.sensor_direito.reflection() > robo.limiar_preto) or counter >= 250):
         wait(10)
+        counter +=1
     wait(1000)
 
 def mapear_z_direita(robo: Robo):
@@ -60,8 +62,10 @@ def mapear_z_direita(robo: Robo):
     girar_angulo(robo, 20)
     robo.motor_direito.run(80)
     robo.motor_esquerdo.run(-80)
-    while(robo.sensor_esquerdo.reflection() > robo.limiar_preto and robo.sensor_direito.reflection() > robo.limiar_preto):
+    counter = 0
+    while((robo.sensor_esquerdo.reflection() > robo.limiar_preto and robo.sensor_direito.reflection() > robo.limiar_preto) or counter >= 250):
         wait(10)
+        counter +=1
     wait(1000)
 
 def mapear_l_esquerda(robo: Robo):
@@ -91,8 +95,10 @@ def mapear_l_esquerda(robo: Robo):
     girar_angulo(robo, 20)
     robo.motor_direito.run(80)
     robo.motor_esquerdo.run(-80)
-    while(robo.sensor_esquerdo.reflection() > robo.limiar_preto and robo.sensor_direito.reflection() > robo.limiar_preto):
+    counter = 0
+    while((robo.sensor_esquerdo.reflection() > robo.limiar_preto and robo.sensor_direito.reflection() > robo.limiar_preto) or counter >= 250):
         wait(10)
+        counter +=1
     wait(1000)
 
 def mapear_l_direita(robo: Robo):
@@ -122,9 +128,14 @@ def mapear_l_direita(robo: Robo):
     girar_angulo(robo, 20)
     robo.motor_direito.run(80)
     robo.motor_esquerdo.run(-80)
-    while(robo.sensor_esquerdo.reflection() > robo.limiar_preto and robo.sensor_direito.reflection() > robo.limiar_preto):
+    counter = 0
+    while((robo.sensor_esquerdo.reflection() > robo.limiar_preto and robo.sensor_direito.reflection() > robo.limiar_preto) or counter >= 250):
         wait(10)
+        counter +=1
     wait(800)
+
+def mapear_reto(robo: Robo):
+    robo.direcao.straight(900)
 
 def seguir_ladrilhos(robo: Robo, numero_ladrilhos: int):
     temp = 3 - ladrilho_atual[sentido_atual] - numero_ladrilhos

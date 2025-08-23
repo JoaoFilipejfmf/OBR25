@@ -55,8 +55,8 @@ def girar_angulo(robo, angulo_desejado):
 
     # Controle proporcional
     Kp = 2.0
-    VELOCIDADE_MAX = 100
-    VELOCIDADE_MIN = 50
+    VELOCIDADE_MAX = 160
+    VELOCIDADE_MIN = 80
     TOLERANCIA = .4  # grau de tolerância para parar
 
     while True:

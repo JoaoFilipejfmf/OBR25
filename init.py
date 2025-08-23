@@ -29,9 +29,9 @@ def calibrar(robo: Robo):
 
     girar_angulo(robo, 30)
 
-    robo.motor_direito.run(100)
-    robo.motor_esquerdo.run(100)
-    wait(1000)
+    robo.motor_direito.run(200)
+    robo.motor_esquerdo.run(200)
+    wait(500)
 
     # Ao invés de fazer uma leitura simples, fazemos uma média simples de 50 leituras para garantir que seja o erro médio central
     for i in range(50):
@@ -39,8 +39,8 @@ def calibrar(robo: Robo):
         wait(10)
     robo.valor_calibragem /= 50.0
 
-    robo.motor_direito.run(-200)
-    robo.motor_esquerdo.run(-200)
-    wait(1400)
+    robo.motor_direito.run(-400)
+    robo.motor_esquerdo.run(-400)
+    wait(700)
 
     girar_angulo(robo, -30)

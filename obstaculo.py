@@ -1,4 +1,5 @@
 from pybricks.tools import wait
+from pybricks.parameters import Icon
 from pid import girar_angulo
 import robot
 
@@ -40,6 +41,7 @@ def desviar_obstaculo(direcao, robo: robot.Robo):
     girar_angulo(robo, 90)
     wait(200)
     
+    robo.direcao.straight(80)
     # 7. Seguir reto até reencontrar a pista
     robo.motor_esquerdo.run(100)
     robo.motor_direito.run(100)
@@ -52,8 +54,8 @@ def desviar_obstaculo(direcao, robo: robot.Robo):
         a = leitura_dir < robo.limiar_preto or leitura_esq < robo.limiar_preto
         wait(20)
 
-    robo.motor_esquerdo.run(100)
-    robo.motor_direito.run(100)
+    robo.motor_esquerdo.run(200)
+    robo.motor_direito.run(200)
     wait(1000)
     
 
@@ -64,7 +66,7 @@ def desviar_obstaculo(direcao, robo: robot.Robo):
     wait(1000)
 
 # -1 direita, 1 esquerda
-def verificar_obstaculo(stopwatch, robo):
+def verificar_obstaculo(stopwatch, robo : robot.Robo):
     distancia = robo.sensor_ultrassonico.distance()
     verificadas = 0
     while distancia < 80:
@@ -75,7 +77,20 @@ def verificar_obstaculo(stopwatch, robo):
         if verificadas > 5:
             robo.motor_esquerdo.stop()
             robo.motor_direito.stop()
-            wait(500)
+            wait(5000)
+            robo.hub.display.icon(Icon.TRUE)
+            wait(200)
+            robo.hub.display.off()
+            wait(200)
+            robo.hub.display.icon(Icon.TRUE)
+            wait(200)
+            robo.hub.display.off()
+            wait(200)
+            robo.hub.display.icon(Icon.TRUE)
+            wait(200)
+            robo.hub.display.off()
+            wait(200)
+            robo.hub.display.icon(Icon.CIRCLE)
             desviar_obstaculo(1, robo)
             stopwatch.reset()
             break

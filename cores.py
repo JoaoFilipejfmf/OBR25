@@ -66,9 +66,9 @@ def verificar_cores(robo: robot.Robo):
         if a:
             robo.hub.display.icon(Icon.LEFT)
 
-            robo.motor_esquerdo.run(100)
-            robo.motor_direito.run(100)
-            wait(1400)
+            robo.motor_esquerdo.run(200)
+            robo.motor_direito.run(200)
+            wait(1000)
             robo.hub.imu.reset_heading(0)
             robo.motor_esquerdo.run(-100)
             robo.motor_direito.run(100)
@@ -82,9 +82,9 @@ def verificar_cores(robo: robot.Robo):
         if a:
             robo.hub.display.icon(Icon.RIGHT)
 
-            robo.motor_esquerdo.run(100)
-            robo.motor_direito.run(100)
-            wait(1400)
+            robo.motor_esquerdo.run(200)
+            robo.motor_direito.run(200)
+            wait(1000)
             robo.hub.imu.reset_heading(0)
             robo.motor_esquerdo.run(100)
             robo.motor_direito.run(-100)

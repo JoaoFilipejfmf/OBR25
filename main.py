@@ -1,4 +1,4 @@
-#Fé gera vitória, Deus segura o robô
+#Fé gera vitória, Deus leva o robô até a vitória
 
 from pybricks.tools import wait, StopWatch
 from pybricks.parameters import Icon, Axis
