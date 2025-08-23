@@ -6,7 +6,7 @@ from pid import pid, curva_reta
 from obstaculo import verificar_obstaculo, desviar_obstaculo
 from cores import verificar_cores
 from init import calibrar
-from resgateseguidor import mapear
+import resgateseguidor
 import robot
 
 robo = robot.Robo()
@@ -47,7 +47,8 @@ while True:
         if contador_resgate <= 0:
             contador_resgate = NUM_RESGATE
             robo.hub.display.icon(Icon.HEART)
-            mapear(robo)
+            resgateseguidor.mapear_l_esquerda(robo)
+            robo.hub.display.icon(Icon.CIRCLE)
         
 
     # if leitura_esq < robo.limiar_preto and leitura_dir > robo.limiar_branco:

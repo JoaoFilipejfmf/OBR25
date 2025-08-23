@@ -24,5 +24,5 @@ class Robo:
         self.motor_direito = Motor(Port.D, Direction.CLOCKWISE)
         self.direcao = DriveBase(self.motor_esquerdo, self.motor_direito, 40, 216)
         self.sensor_ultrassonico = UltrasonicSensor(Port.E)
-    def distancia_ultrassonico_centro(self, distancia_do_centro = 49):
+    def distancia_ultrassonico_centro(self, distancia_do_centro = 40):
         return self.sensor_ultrassonico.distance() + distancia_do_centro
