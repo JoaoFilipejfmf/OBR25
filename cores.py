@@ -59,6 +59,7 @@ def verificar_cores(robo: robot.Robo):
             robo.motor_direito.run(-200)
             while(abs(robo.hub.imu.heading()) < 175):
                 wait(10)
+            robo.direcao.straight(-60)
             robo.hub.display.icon(Icon.CIRCLE)
     elif verde_esq:
         a = verificarVerdeFalso(robo, robo.sensor_esquerdo)
@@ -74,7 +75,7 @@ def verificar_cores(robo: robot.Robo):
             robo.motor_direito.run(100)
             while(abs(robo.hub.imu.heading()) < 85):
                 wait(10)
-
+            robo.direcao.straight(-30)
             robo.hub.display.icon(Icon.CIRCLE)
     elif verde_dir:
         # Vira para a direita
@@ -90,5 +91,5 @@ def verificar_cores(robo: robot.Robo):
             robo.motor_direito.run(-100)
             while(abs(robo.hub.imu.heading()) < 85):
                 wait(10)
-
+            robo.direcao.straight(-30)
             robo.hub.display.icon(Icon.CIRCLE)

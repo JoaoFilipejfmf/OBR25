@@ -24,8 +24,8 @@ def pid(leitura_dir, leitura_esq, robo : robot.Robo):
     velocidade_esq = robo.velocidade_base - correcao
     velocidade_dir = robo.velocidade_base + correcao
 
-    robo.motor_esquerdo.run(velocidade_esq)
-    robo.motor_direito.run(velocidade_dir)
+    robo.motor_esquerdo.run(min(robo.vel_max, max(robo.vel_min, velocidade_esq)))
+    robo.motor_direito.run(min(robo.vel_max, max(robo.vel_min, velocidade_dir)))
 
 def curva_reta(leitura_esq, leitura_dir, robo):
     if leitura_esq < robot.limiar_preto and leitura_dir > robot.limiar_branco:

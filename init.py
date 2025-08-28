@@ -4,6 +4,11 @@ from pybricks.parameters import Icon
 from robot import Robo
 
 def calibrar(robo: Robo):
+    for i in range(25):
+        robo.hub.display.icon(Icon.TRUE)
+        wait(200)
+        robo.hub.display.off()
+        wait(200)
     robo.hub.display.icon(Icon.SQUARE)
     robo.sensor_direito.lights.off()
     robo.sensor_esquerdo.lights.off()
@@ -31,7 +36,7 @@ def calibrar(robo: Robo):
 
     robo.motor_direito.run(200)
     robo.motor_esquerdo.run(200)
-    wait(500)
+    wait(300)
 
     # Ao invés de fazer uma leitura simples, fazemos uma média simples de 50 leituras para garantir que seja o erro médio central
     for i in range(50):
@@ -41,6 +46,6 @@ def calibrar(robo: Robo):
 
     robo.motor_direito.run(-400)
     robo.motor_esquerdo.run(-400)
-    wait(700)
+    wait(900)
 
     girar_angulo(robo, -30)

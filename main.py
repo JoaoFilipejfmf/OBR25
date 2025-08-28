@@ -37,18 +37,18 @@ while True:
     pid(leitura_dir, leitura_esq, robo)
 
     # === Resgate ===
-    pitchs.append(robo.hub.imu.tilt()[0])
-    if len(pitchs) >= 150:
-        pitchs.pop(0)
-    if (leitura_dir > robo.resgate and leitura_esq > robo.resgate) or contador_resgate < NUM_RESGATE:
-        contador_resgate -= 1
-        if max(pitchs) - min(pitchs) > 5:
-            contador_resgate = NUM_RESGATE
-        if contador_resgate <= 0:
-            contador_resgate = NUM_RESGATE
-            robo.hub.display.icon(Icon.HEART)
-            resgateseguidor.mapear_l_esquerda(robo)
-            robo.hub.display.icon(Icon.CIRCLE)
+    # pitchs.append(robo.hub.imu.tilt()[0])
+    # if len(pitchs) >= 150:
+    #     pitchs.pop(0)
+    # if (leitura_dir > robo.resgate and leitura_esq > robo.resgate) or contador_resgate < NUM_RESGATE:
+    #     contador_resgate -= 1
+    #     if max(pitchs) - min(pitchs) > 5:
+    #         contador_resgate = NUM_RESGATE
+    #     if contador_resgate <= 0:
+    #         contador_resgate = NUM_RESGATE
+    #         robo.hub.display.icon(Icon.HEART)
+    #         resgateseguidor.mapear_l_esquerda(robo)
+    #         robo.hub.display.icon(Icon.CIRCLE)
         
 
     # if leitura_esq < robo.limiar_preto and leitura_dir > robo.limiar_branco:

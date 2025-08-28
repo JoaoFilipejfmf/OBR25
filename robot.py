@@ -10,10 +10,12 @@ class Robo:
         self.limiar_branco = 0
         self.limiar_preto = 0
         self.resgate = 0
-        self.Kp = 18
+        self.Kp = 30
         self.Ki = 0
         self.Kd = 0
         self.velocidade_base = 240
+        self.vel_min = -400
+        self.vel_max = 500
         self.integral = 0
         self.erro_anterior = 0
         self.erros = []
